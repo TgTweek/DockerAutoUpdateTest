@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . -t tgtweek/dockerautotest:latest -f DockerUpdateAutoViaGit/Dockerfile
+    - name: Push Image to DockerHub
+      run: |
+       docker login -u thenuker2 -p ${{ secrets.DOCKER_HUB_TOKEN }}
+       docker push thenuker2/weatherforecast_api:latest
