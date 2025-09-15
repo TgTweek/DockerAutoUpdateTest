@@ -18,5 +18,5 @@ jobs:
       run: docker build . -t tgtweek/dockerautotest:latest -f DockerUpdateAutoViaGit/Dockerfile
     - name: Push Image to DockerHub
       run: |
-       docker login -u tgtweek -p ${{ secrets.ACCES_TOKEN }}
+       docker login -u tgtweek -p ${{ secrets.DOCKER_HUB_TOKEN }}
        docker push tgtweek/dockerautotest:latest
